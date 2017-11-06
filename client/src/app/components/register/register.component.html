@@ -1,0 +1,85 @@
+<div class="jumbotron text-center" style="margin-top:-40px;padding-bottom:30px">
+        <div class="row">
+            <div class="col-sm-6 col-md-12">
+              <div class="thumbnail">
+                <img src="http://www.zoommedia.com/en-ca/wp-content/uploads/sites/4/2016/02/after-workout.png" alt="placeholder image" width="140" height="140">
+              </div>
+            </div>
+          </div>
+        <h3>WorkoutMate.</h3>
+        <p class="lead">Want to be a member? Go ahead. Fill out this simple form.</p>
+</div>
+<div class="container col-md-6 col-md-offset-10" style="padding-bottom:50px">
+        <form [formGroup]="form" (submit)="onRegisterSubmit()"> 
+                <div class="form-group"> 
+                    <label for="username">Username</label> 
+                    <div> 
+                        <input type="text" name="username" class="form-control" [ngClass]="{'is-invalid':(form.controls.username.errors && form.controls.username.dirty), 'is-valid': !form.controls.username.errors}" autocomplete="off" placeholder="*Username" formControlName="username"> 
+                        <ul class="help-block text-danger">
+                                <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">
+                                    This field is required!
+                                </li>
+                                <li *ngIf="form.controls.username.errors?.minlength || form.controls.username.errors?.maxlength">
+                                    Minimum 3 characters, Maximum 15 characters
+                                </li>
+                                <li  *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">
+                                    Username must not have any special characters
+                                </li>
+                        </ul>
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="email">E-mail</label> 
+                    <div > 
+                        <input type="text" name="email" class="form-control" [ngClass]="{'is-invalid':(form.controls.email.errors && form.controls.email.dirty), 'is-valid': !form.controls.email.errors}" autocomplete="off" placeholder="*E-mail" formControlName="email"> 
+                        <ul class="help-block text-danger">
+                                <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">
+                                    This field is required!
+                                </li>
+                                <li *ngIf="(form.controls.email.errors?.minlength || form.controls.email.errors?.maxlengt) && form.controls.email.dirty">
+                                        Minimum 5 characters, Maximum 30 characters
+                                </li>
+                                <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">
+                                        E-mail must be valid
+                                </li>
+                        </ul>
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="password">Password</label> 
+                    <div> 
+                        <input type="password" name="password" class="form-control" [ngClass]="{'is-invalid':(form.controls.password.errors && form.controls.password.dirty), 'is-valid': !form.controls.password.errors}" autocomplete="off" placeholder="*Password" formControlName="password"> 
+                        <ul class="help-block text-danger">
+                                <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">
+                                    This field is required!
+                                </li>
+                                <li *ngIf="form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength">
+                                        Minimum 8 characters, Maximum 35 characters
+                                </li>
+                                <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">
+                                        Must have atleast one uppercase, lowercase, special character, and number
+                                </li>
+                        </ul>
+                    </div> 
+                </div> 
+                <div class="form-group">
+                    <label for="confirm">Confirm Password</label> 
+                    <div> 
+                        <input type="password" name="confirm" class="form-control" [ngClass]="{'is-invalid':(form.controls.confirm.errors && form.controls.confirm.dirty) || (form.errors?.matchingPasswords && form.controls.confirm.dirty), 'is-valid': !form.controls.confirm.errors && !form.errors?cd.matchingPasswords}" autocomplete="off" placeholder="*Confirm Password" formControlName="confirm">
+                        <ul class="help-block text-danger">
+                                <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">
+                                    This field is required!
+                                </li>
+                                <li *ngIf="form.controls.confirm.errors?.minlength || form.controls.confirm.errors?.maxlength">
+                                        Minimum 3 characters, Maximum 15 characters
+                                </li>
+                                <li *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty">
+                                    Passwords do not match!
+                                </li>
+                        </ul> 
+                    </div> 
+                </div> 
+                <input [disabled]="!form.valid" type="submit" class="btn btn-primary btn-block" value=Register> 
+            </form>
+</div>
+
