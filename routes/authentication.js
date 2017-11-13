@@ -26,7 +26,7 @@ module.exports = (router) => {
                     });
                     user.save((err) =>{
                         if(err){
-                            if(err){
+                            if(err.code === 11000){
                                 res.json({ success:false, message:'Username or e-mail already exists!'});
                             }
                             else{

@@ -138,7 +138,12 @@ export class RegisterComponent implements OnInit {
     this.authService.checkEmail(email).subscribe(data => {
       if (!data.success) {
         this.emailValid = false;
-        this.emailMessage = data.message;
+        if (data.message == 'No token provided!') {
+          
+        }else{
+          this.emailMessage = data.message;
+        }
+        
       }else{
         this.emailValid = true;
         this.emailMessage = data.message;
@@ -151,7 +156,11 @@ export class RegisterComponent implements OnInit {
     this.authService.checkUsername(username).subscribe(data => {
       if (!data.success) {
         this.usernameValid = false;
+        if (data.message == 'No token provided!') {
+          
+        }else{
         this.usernameMessage = data.message;
+        }
       }else{
         this.usernameValid = true;
         this.usernameMessage = data.message;
