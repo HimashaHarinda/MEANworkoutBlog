@@ -1,0 +1,155 @@
+
+<div class="jumbotron text-center" style="margin-top:-50px;padding-bottom:30px" *ngIf="newPost">
+    <div class="row">
+        <div class="col-sm-6 col-md-12">
+          <div class="thumbnail">
+            <img src="http://www.zoommedia.com/en-ca/wp-content/uploads/sites/4/2016/02/after-workout.png" alt="placeholder image" width="140" height="140">
+          </div>
+        </div>
+      </div>
+    <h1>WorkoutMate.</h1>
+    <p class="lead">Want to share something with your friends? Go ahead.</p>
+</div>
+
+<div class="container col-md-6 col-md-offset-10" style="padding-bottom:50px">
+  <div class="row show-hide-message col-md-6 col-md-offset-10" class="width: 100px" *ngIf="message && newPost">
+    <div [ngClass]="messageClass">
+      {{ message }}
+    </div>
+  </div>
+
+  <button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
+  <button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-default"  *ngIf="!newPost" (click)="reloadBlogs()"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reload</button>
+
+
+<!-- New Blog Form -->
+  <form [formGroup]="form" name="blogForm" (submit)="onBlogSubmit()" *ngIf="newPost">
+    <!-- Title Input -->
+    <div class="form-group">
+      <label for="title">Title</label>
+      <div>
+        <!-- Title Input -->
+        <input type="text" name="title" class="form-control" placeholder="*Title" autocomplete="off" formControlName="title" [ngClass]="{'is-valid': form.controls.title.valid, 'is-invalid': form.controls.title.dirty && form.controls.title.errors}"/>
+        <!-- Validation -->
+        <ul class="help-block text-danger">
+          <li *ngIf="form.controls.title.dirty && form.controls.title.errors?.required">This field is required.</li>
+          <li *ngIf="(form.controls.title.dirty && form.controls.title.errors?.minlength) || (form.controls.title.dirty && form.controls.title.errors?.maxlength)">Minimum 5 characters, Maximum 50 characters</li>
+          <li *ngIf="form.controls.title.dirty && form.controls.title.errors?.alphaNumericValidation">Must be a letter or number</li>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- Body Input -->
+    <div class="form-group">
+      <label for="body">Body</label>
+      <div >
+        <!-- Body Input -->
+        <textarea name="body" rows="4" cols="80" placeholder="*Body" class="form-control" formControlName="body" [ngClass]="{'is-valid': form.controls.body.valid, 'is-invalid': form.controls.body.dirty && form.controls.body.errors}"></textarea>
+        <!-- Validation -->
+        <ul class="help-block text-danger">
+          <li *ngIf="form.controls.body.dirty && form.controls.body.errors?.required">This field is required.</li>
+          <li *ngIf="(form.controls.body.dirty && form.controls.body.errors?.minlength) || (form.controls.body.dirty && form.controls.body.errors?.maxlength)">Minimum 5 characters, Maximum 500 characters</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- route Input -->
+    <div class="form-group">
+        <label for="route">Route</label>
+        <div >
+          <!-- Route Input -->
+          <input type="text" name="route" class="form-control" placeholder="*Route" autocomplete="off" formControlName="route" [ngClass]="{'is-valid': form.controls.route.dirty,'is-invalid': form.controls.route.errors}"/>
+        </div>
+    </div>
+
+    <!-- distance Input -->
+    <div class="form-group">
+        <label for="distance">Distance</label>
+        <div class="form-group">
+          <div class="input-group" >
+              <input type="text" name="distance" class="form-control" placeholder="*Distance" autocomplete="off" formControlName="distance" [ngClass]="{'is-valid': form.controls.distance.dirty,'is-invalid': form.controls.distance.dirty && form.controls.distance.errors}"/>
+          <div class="input-group-addon">kilometer</div>
+          </div>
+          <!-- Validation -->
+          <ul class="help-block text-danger">
+              <li *ngIf="form.controls.distance.dirty && form.controls.distance.errors?.distanceCharacterValidation">Distance must be a number</li>
+          </ul>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="hrate">Hear Rate</label>
+        <div class="form-group">
+          <div class="input-group" >
+              <input type="text" name="hrate" class="form-control" placeholder="*Heart Rate" autocomplete="off" formControlName="hrate" [ngClass]="{'is-valid': form.controls.hrate.dirty,'is-invalid': form.controls.hrate.dirty && form.controls.hrate.errors}"/>
+          <div class="input-group-addon">beats per minute</div>
+          </div>
+          <!-- Validation -->
+          <ul class="help-block text-danger">
+              <li *ngIf="form.controls.hrate.dirty && form.controls.hrate.errors?.distanceCharacterValidation">Heart rate must be a number</li>
+          </ul>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-outline-success btn-block">Submit</button>
+    <!-- Go Back Button -->
+    <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-outline-warning btn-block">Go Back</button>
+    
+  
+  </form>
+  <!-- New Blog Form -->
+</div>
+
+
+<div *ngIf="!newPost">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Himasha Harinda</h5>
+      <h6 class="card-subtitle text-muted">Post Title</h6>
+    </div>
+    <div  class="card-body">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt aperiam possimus, dolorem esse quod error vitae modi assumenda, nam fuga in corporis minus provident facilis voluptas est animi impedit atque.
+    </div>
+    <div class="card-footer text-muted">
+      <h6><strong>Date :</strong>June 20, 2017</h6>
+      <div>
+        <h6><strong>Likes: </strong>25</h6>
+        <h6><strong>DisLikes: </strong>25</h6>
+      </div>
+      <button type="button" class="btn btn-outline-primary">Edit</button>
+      <button type="button" class="btn btn-outline-danger">Delete</button>
+      <div class="dropdown">
+        <button type="button" name="button" class="btn btn-sm btn-outline-success">
+          <span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: 2
+        </button>
+        <div class="dropdown-content">
+          <a href="#">sasfsss</a>
+          <a href="#">sssssd</a>
+        </div>
+      </div>
+      <div class="dropdown">
+          <button type="button" name="button" class="btn btn-sm btn-outline-warning">
+            <span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dis  Likes: 2
+          </button>
+          <div class="dropdown-content">
+            <a href="#">sasfsss</a>
+            <a href="#">sssssd</a>
+          </div>
+        </div>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button type="button" name="button" class="btn btn-sm btn-primary "(click)="draftComment()">Post Comment</button>
+      
+      <!-- <form>
+        <textarea name="comment" rows="10" cols="30" class="form-control"></textarea>
+        <button type="button" name="button" class="btn btn-sm btn-info">Submit Post</button>
+        <button type="button" name="button" class="btn btn-sm btn-danger">Cancel</button>
+      </form> -->
+      </li>
+    </ul>
+  </div>
+  
+</div>

@@ -6,15 +6,15 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto navbar-left">
-      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
-      </li>
       <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" routerLink="/dashboard">Dashboard</a>
       </li>
       <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" routerLink="/profile">Profile</a>
+        <a class="nav-link" routerLink="/profile" data-toggle="tooltip" data-placement="bottom" title="Profile">Profile</a>
       </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" routerLink="/blog" data-toggle="tooltip" data-placement="bottom" title="Profile">Blog</a>
+        </li>
       <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
       </li>
