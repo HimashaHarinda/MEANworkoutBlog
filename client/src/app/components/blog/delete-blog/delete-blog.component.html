@@ -1,0 +1,20 @@
+
+<div class="container col-md-6 col-md-offset-10" style="padding-top:50px">
+    <div class="row show-hide-message col-md-6 col-md-offset-10" class="width: 100px" *ngIf="message">
+        <div [ngClass]="messageClass">
+          {{ message }}
+        </div>
+      </div>
+
+      <div class="jumbotron text-center" style="margin-top:50px;padding-bottom:30px;"  *ngIf="foundBlog" >
+          
+          <p class="lead">Are you sure you wanna delete this post?</p>
+          <button [disabled]="processing" style="width:100px !important" type="button" name="button" class="btn btn-outline-success " (click)="deleteBlog()">Yes</button>
+          <a routerLink="/blog"><button [disabled]="processing" style="width:100px !important" type="button" name="button" class="btn btn-outline-danger">No</button></a>
+      </div>
+      
+</div>    
+
+
+<!-- Custom Success/Error Message -->
+

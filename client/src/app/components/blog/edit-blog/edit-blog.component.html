@@ -1,0 +1,66 @@
+<div class="jumbotron text-center" style="margin-top:-50px;padding-bottom:30px;" >
+    <div class="row">
+        <div class="col-sm-6 col-md-12">
+          <div class="thumbnail">
+            <img src="http://www.zoommedia.com/en-ca/wp-content/uploads/sites/4/2016/02/after-workout.png" alt="placeholder image" width="140" height="140">
+          </div>
+        </div>
+      </div>
+    
+    <p class="lead">Go ahead, Make your changes and update.</p>  
+</div>
+
+<div class="container col-md-6 col-md-offset-10" style="padding-bottom:50px">
+  <!-- Custom Success/Erro Message -->
+  <div class="row show-hide-message col-md-6 col-md-offset-10" class="width: 100px"  *ngIf="message">
+      <div [ngClass]="messageClass">
+        {{ message }}
+      </div>
+    </div>
+
+    <!-- Edit Blog Form -->
+  <form (submit)="updateBlogSubmit()" *ngIf="!loading">
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <!-- Title Input -->
+        <input [disabled]="processing" type="text" name="title" placeholder="*Blog Title" class="form-control" [(ngModel)]="blog.title" #title="ngModel" />
+      </div>
+    
+      <!-- Body Field -->
+      <div class="form-group">
+        <label for="body">Body</label>
+        <!-- Body Input -->
+        <textarea [disabled]="processing" name="body" rows="4" cols="80" [(ngModel)]="blog.body" #body="ngModel" class="form-control" placeholder="*Blog Body"></textarea>
+      </div>
+
+      <!-- Route Field -->
+      <div class="form-group">
+          <label for="route">Route</label>
+          <!-- Body Input -->
+          <input [disabled]="processing" type="text" name="route" placeholder="*Route" class="form-control" [(ngModel)]="blog.route" #route="ngModel" />
+        </div>
+
+      <!-- Distance Field -->
+      <div class="form-group">
+          <label for="distance">Distance</label>
+          <!-- Distance Input -->
+          <input [disabled]="processing" type="text" name="distance" placeholder="*Distance" class="form-control" [(ngModel)]="blog.distance" #distance="ngModel" />
+        </div>
+
+      <!-- hrate Field -->
+      <div class="form-group">
+          <label for="distance">Heart rate</label>
+          <!-- hrate Input -->
+          <input [disabled]="processing" type="text" name="hrate" placeholder="*Heart rate" class="form-control" [(ngModel)]="blog.hrate" #hrate="ngModel" />
+        </div>
+    
+      <!-- Delete Button -->
+      <!-- Go Back Button -->
+      <button [disabled]="processing || (!title.dirty && !body.dirty && !distance.dirty && !hrate.dirty && !route.dirty)" type="submit" name="save" class="btn btn-outline-info btn-block">Save</button>
+      <button [disabled]="processing" type="button" name="button" class="btn btn-outline-success btn-block" (click)="goBack()">Go Back</button>
+      <!-- Save Changes Button -->
+      
+    
+    </form>
+  </div>

@@ -31,4 +31,53 @@ export class BlogService {
     return this.http.post(this.domain + 'blogs/newBlog', blog, this.options).map(res => res.json());
     }
 
+    getAllBlogs(){
+      this.createAuthenticationHeaders();
+      return this.http.get(this.domain + 'blogs/allBlogs', this.options).map(res => res.json());
+    }
+
+    getSingleBlog(id){
+      this.createAuthenticationHeaders();
+      return this.http.get(this.domain + 'blogs/singleBlog/'+ id, this.options).map(res => res.json());
+    }
+
+    editBlog(blog){
+      this.createAuthenticationHeaders();
+      return this.http.put(this.domain + 'blogs/updateBlog/', blog, this.options).map(res => res.json());
+    }
+
+    deleteBlog(id) {
+      this.createAuthenticationHeaders(); // Create headers
+      return this.http.delete(this.domain + 'blogs/deleteBlog/' + id, this.options).map(res => res.json());
+    }
+
+    likeBlog(id) {
+      const blogData = { id: id };
+      return this.http.put(this.domain + 'blogs/likeBlog/', blogData, this.options).map(res => res.json());
+    }
+  
+    // Function to dislike a blog post
+    dislikeBlog(id) {
+      const blogData = { id: id };
+      return this.http.put(this.domain + 'blogs/dislikeBlog/', blogData, this.options).map(res => res.json());
+    }
+
+    // Function to get public profile data
+    getPublicProfile(username) {
+    this.createAuthenticationHeaders(); // Create headers before sending to API
+    return this.http.get(this.domain + 'authentication/publicProfile/' + username, this.options).map(res => res.json());
+    }
+
+    // Function to post a comment on a blog post
+  postComment(id, comment) {
+    this.createAuthenticationHeaders(); // Create headers
+    // Create blogData to pass to backend
+    const blogData = {
+      id: id,
+      comment: comment
+    }
+    return this.http.post(this.domain + 'blogs/comment', blogData, this.options).map(res => res.json());
+
+  }
+
 }
